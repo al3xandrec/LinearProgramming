@@ -147,7 +147,6 @@ def PrintCurrentTable(c, A, b, bv, cv):
 def InnerProd(u, v):
     n1 = len(u)
     n2 = len(v)
-    print(u, v)
     if (n1 < n2):
         for i in range(n2 - n1):
             u.append(0)
