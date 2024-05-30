@@ -119,29 +119,36 @@ def PrintCurrentTable(c, A, b, bv, cv):
     n = len(c)
     m = len(A)
 
-    print("-"*(22*(n+3)+3))
+    firstColumnLenght = 20
+    secondColumnLenght = 20
+    variablesColumnsLenght = 10
+    lastColumnLength = 18
 
-    print("|", "Basic Variables".center(20, ' '), "|", "Variables".center(20, ' '), end='')
+    totalLength = firstColumnLenght + secondColumnLenght + n*variablesColumnsLenght + lastColumnLength + 2*n+9
+
+    print("-"*totalLength)
+
+    print("|", "Basic Variables".center(firstColumnLenght, ' '), "|", "Variables".center(secondColumnLenght, ' '), end='')
     for i in range(n):
-        print("|", f"x[{i}]".center(20, ' '), end='')
-    print("|", "Current Value".center(20, ' '), "|")
+        print("|", f"x[{i}]".center(variablesColumnsLenght, ' '), end='')
+    print("|", "Current Value".center(lastColumnLength, ' '), "|")
     
-    print("-"*(22*(n+3)+3))
+    print("-"*totalLength)
 
     for j in range(m):
-        print("|", f"x[{bv[j]}]".center(20, ' '), "|", f"Constraint {j+1}".center(20, ' '), end='')
+        print("|", f"x[{bv[j]}]".center(firstColumnLenght, ' '), "|", f"Constraint {j+1}".center(secondColumnLenght, ' '), end='')
         for i in range(n):
-            print("|", f"{A[j][i]:0.2f}".center(20, ' '), end='')
-        print("|", f"{b[j]:0.2f}".center(20, ' '), "|")
+            print("|", f"{A[j][i]:0.2f}".center(variablesColumnsLenght, ' '), end='')
+        print("|", f"{b[j]:0.2f}".center(lastColumnLength, ' '), "|")
 
-    print("-"*(22*(n+3)+3))
+    print("-"*totalLength)
 
-    print("|", " ".center(20, ' '), "|", "Objective Function".center(20, ' '), end='')
+    print("|", " ".center(firstColumnLenght, ' '), "|", "Objective Function".center(secondColumnLenght, ' '), end='')
     for i in range(n):
-        print("|", f"{c[i]:0.2f}".center(20, ' '), end='')
-    print("|", f"{cv:0.2f}".center(20, ' '), "|")
+        print("|", f"{c[i]:0.2f}".center(variablesColumnsLenght, ' '), end='')
+    print("|", f"{cv:0.2f}".center(lastColumnLength, ' '), "|")
 
-    print("-"*(22*(n+3)+3))
+    print("-"*totalLength)
     print("")
 
 def InnerProd(u, v):
@@ -181,12 +188,12 @@ def Simplex(c, boolMin, A, sg, b):
         # Find BV to replace
         minDiv = 0
         for i in range(m):
-            if A[i][newBV] != 0:
-                minDiv += abs(b[i]/A[i][newBV])
+            if ASF[i][newBV] != 0:
+                minDiv += abs(bSF[i]/ASF[i][newBV])
         minDivLine = -1
         for i in range(m):
-            if A[i][newBV] != 0:
-                ratio = b[i]/A[i][newBV]
+            if ASF[i][newBV] != 0:
+                ratio = bSF[i]/ASF[i][newBV]
                 if ratio > 0 and ratio < minDiv:
                     minDiv = ratio
                     minDivLine = i
