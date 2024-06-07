@@ -171,6 +171,10 @@ def Simplex(c, boolMin, A, sg, b):
     m = len(ASF)
     x = [0]*n
     bv = FindId(ASF)
+    for i in range(len(bv)):
+        x[bv[i]] = bSF[i]
+    print(cSF)
+    print(x)
     obValue = InnerProd(cSF, x)
 
     PrintCurrentTable(cSF, ASF, bSF, bv, obValue)
@@ -194,7 +198,7 @@ def Simplex(c, boolMin, A, sg, b):
         for i in range(m):
             if ASF[i][newBV] != 0:
                 ratio = bSF[i]/ASF[i][newBV]
-                if ratio > 0 and ratio < minDiv:
+                if ratio > 0 and ratio <= minDiv:
                     minDiv = ratio
                     minDivLine = i
         if minDivLine == -1:
