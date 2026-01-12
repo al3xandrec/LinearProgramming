@@ -1,5 +1,6 @@
 from Solver.Simplex import *
-
+from BranchAndBound.bnbsolver import *
+'''
 def main():
     filename = "Solver/SimplexInput.txt"
     with open(filename, 'r') as file:
@@ -46,3 +47,7 @@ def main():
         print(f"Valor da Função Objetivo: {InnerProd(c, x):0.2f}")
 
 main()
+'''
+lp = LPSolver("linearproblem.txt")
+
+lp.GetProblem()
